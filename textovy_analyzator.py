@@ -16,6 +16,8 @@ login = input("Please insert your login: ")
 
 # zjistí, jestli zadané údaje odpovídají někomu z registrovaných uživatelů,
 
+texts_count = len(tt.TEXTS)
+
 if str(login) in users.logins:
     password = input("Please insert your password: ")
 
@@ -23,7 +25,9 @@ if str(login) in users.logins:
 
     if str(password) in users.users[str(login)]:
 
-        print("Hi! Welcome in Text Analyser!")
+        print(f"Hi! Welcome to the Text Analyser, {login}!")
+        print("We have {texts_count} texts to be analyzed.")
+        print(separator)
         print(f"For a text analysis you can choose from these text:\n")
         print(f"No. 1: {tt.TEXTS[0]}")
         print(f"No. 2: {tt.TEXTS[1]}")
@@ -79,7 +83,14 @@ if str(login) in users.logins:
 
             # počet slov začínajících velkým písmenem,
 
-            print(analyzed_text)
+            words_with_capitals = 0
+
+            for words in analyzed_text:
+                if words[0].isupper() is True:
+                    words_with_capitals += 1
+
+            print(f"There are {words_with_capitals} titlecase words.")
+            # print(analyzed_text)
 
             # počet slov psaných velkými písmeny,
 
