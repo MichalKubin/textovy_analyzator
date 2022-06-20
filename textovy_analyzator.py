@@ -8,7 +8,7 @@ discord: Michal Kubín #0577
 import task_template as tt
 import users
 
-separator = "-" * 10
+separator = "-" * 30
 
 # Vyžádá si od uživatele přihlašovací jméno a heslo
 
@@ -24,11 +24,11 @@ if str(login) in users.logins:
     # pokud je registrovaný, pozdrav jej a umožni mu analyzovat texty,
 
     if str(password) in users.users[str(login)]:
-
-        print(f"Hi! Welcome to the Text Analyser, {login}!")
-        print("We have {texts_count} texts to be analyzed.")
         print(separator)
-        print(f"For a text analysis you can choose from these text:\n")
+        print(f"Hi! Welcome to the Text Analyser, {login}!")
+        print(f"We have {texts_count} texts to be analyzed.")
+        print(separator)
+        print("For a text analysis you can choose from these text:\n")
         print(f"No. 1: {tt.TEXTS[0]}")
         print(f"No. 2: {tt.TEXTS[1]}")
         print(f"No. 3: {tt.TEXTS[2]}")
@@ -94,12 +94,71 @@ if str(login) in users.logins:
 
             # počet slov psaných velkými písmeny,
 
+            words_uppercase = 0
+
+            for words in analyzed_text:
+                if words.isupper() is True:
+                    words_uppercase += 1
+
+            print(f"There are {words_uppercase} uppercase words.")
+
             # počet slov psaných malými písmeny,
+
+            words_lowercase = 0
+
+            for words in analyzed_text:
+                if words.islower() is True:
+                    words_lowercase += 1
+
+            print(f"There are {words_lowercase} lowercase words.")
 
             # počet čísel (ne cifer),
 
+            numbers_count = 0
+
+            for words in analyzed_text:
+                if words.isnumeric() is True:
+                    numbers_count += 1
+
+            print(f"There are {numbers_count} numeric strings.")
+
             # sumu všech čísel (ne cifer) v textu.
 
+            numbers_sum = 0
+            numbers_sum = int(numbers_sum)
+
+            for words in analyzed_text:
+                if words.isnumeric() is True:
+                    numbers_sum += int(words)
+
+            print(f"The sum of all the numbers: {numbers_sum}")
+
+            # Program zobrazí jednoduchý sloupcový graf, který bude
+            # reprezentovat četnost různých délek slov v textu.
+
+            print(separator)
+            print(" LEN |    OCCURENCES    | NR. ")
+            print(separator)
+
+            word_length = []
+
+            for words in analyzed_text:
+                word_length.append(len(words))
+
+            word_length.sort()
+            # print(word_length)
+
+            count_length = 1
+
+            while count_length <= word_length[-1]:
+                print(str(count_length).rjust(4) +
+                      str("") * (4 - len(str(count_length))) +
+                      " |" +
+                      "*" * (word_length.count(count_length)) +
+                      " " * (18 - word_length.count(count_length)) +
+                      "|" +
+                      str(word_length.count(count_length)).rjust(4))
+                count_length += 1
 
     # pokud nesedí login a heslo, upozorni uživatele a ukonči program
 
