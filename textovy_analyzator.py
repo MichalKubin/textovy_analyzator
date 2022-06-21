@@ -67,18 +67,15 @@ if str(login) in users.logins:
 
             # Pro vybraný text spočítá následující statistiky:
 
-            analyzed_text = tt.TEXTS[int(chosen_text)-1]
+                analyzed_text = tt.TEXTS[int(chosen_text)-1]
 
-            # odstraní tečky, čárky a pomlčky
+    # odstraní tečky, čárky a pomlčky
 
         for forbidden_character in analyzed_text:
             if forbidden_character == "." or forbidden_character == ",":
                 analyzed_text = str(analyzed_text).replace(
                     forbidden_character, "")
-            elif forbidden_character == "-":
-                analyzed_text = str(analyzed_text).replace(
-                    forbidden_character, " ")
-            elif forbidden_character == "\n":
+            elif forbidden_character == "-" or forbidden_character == "\n":
                 analyzed_text = str(analyzed_text).replace(
                     forbidden_character, " ")
 
